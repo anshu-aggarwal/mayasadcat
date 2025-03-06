@@ -8,6 +8,7 @@
 #' @export Code_single
 
 Code_single = function(data, text = "word", more2na = T){
+  cat("[Code_single] length of SADCAT::Dictionaries is ", length(SADCAT::Dictionaries))
   Dictionariesx = dplyr::select(SADCAT::Dictionaries,-c(Val_bing:Val))
   res = merge(x = data, y = Dictionariesx, by.x = text, by.y = "word", all.x = T)
   res2 = dplyr::select(res, contains("_dict"))
