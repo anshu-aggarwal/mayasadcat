@@ -17,12 +17,13 @@ Code_single = function(data, text = "word", more2na = T){
   }
   cat("[Code_single] variable name is ", Val_bing::Val)
   tryCatch(
-  {
-	Dictionariesx = dplyr::select(SADCAT::Dictionaries, -c(Val_bing:Val))
-  },
-  error = function(e) {
+    {
+    	Dictionariesx = dplyr::select(SADCAT::Dictionaries, -c(Val_bing:Val))
+    },
+    error = function(e) {
   	cat("[Code_single] the following error occurred: ", e)
-  }
+    }
+  )
   res = merge(x = data, y = Dictionariesx, by.x = text, by.y = "word", all.x = T)
   res2 = dplyr::select(res, contains("_dict"))
   for(i in colnames(res2)){
