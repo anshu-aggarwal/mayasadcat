@@ -17,22 +17,9 @@ Code_single = function(data, text = "word", more2na = T){
   res = dplyr::select(res, -contains("_dict"))
   res = cbind(res,res2)
   print("3")
-  if (is.null(Dictionaries)) {
-     cat("[Code_single] Dictionaries is NULL, Senora!")
-     if (is.null(SADCAT::Dictionaries)) {
-             cat("[Code_single] and so is SADCAT::Dictionaries")
-     }
-     else {
-             cat("[Code_single] but SADCAT::Dictionaries is not and there you have it!")
-     }
-  }
-  else {
-     cat("[Code_single] length of Dictionaries is ", length(Dictionaries), "\n")
-     cat("[Code_single] columns of Dictionaries are ", colnames(Dictionaries), "\n")
-  }
   tryCatch(
     {
-	Dicts_v3pre = unique(Dictionaries$word)
+	Dicts_v3pre = unique(SADCAT::Dictionaries$word)
     },
     error = function(e) {
   	print("[Code_single] the following error occurred: ")
