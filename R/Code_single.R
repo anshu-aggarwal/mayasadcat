@@ -12,8 +12,8 @@ Code_single = function(data, text = "word", more2na = T){
      cat("[Code_single] Dictionaries is NULL, Senora!")
   }
   else {
-     cat("[Code_single] length of SADCAT::Dictionaries is ", length(SADCAT::Dictionaries))
-     cat("[Code_single] columns of SADCAT::Dictionaries are ", colnames(SADCAT::Dictionaries))
+     cat("[Code_single] length of SADCAT::Dictionaries is ", length(SADCAT::Dictionaries), "\n")
+     cat("[Code_single] columns of SADCAT::Dictionaries are ", colnames(SADCAT::Dictionaries), "\n")
   }
   cat("[Code_single] variable name is ", Val_bing::Val)
   tryCatch(
