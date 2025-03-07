@@ -13,8 +13,16 @@ Code_single = function(data, text = "word", more2na = T){
   }
   else {
      cat("[Code_single] length of SADCAT::Dictionaries is ", length(SADCAT::Dictionaries))
+     cat("[Code_single] columns of SADCAT::Dictionaries are ", colnames(SADCAT::Dictionaries))
   }
-  Dictionariesx = dplyr::select(SADCAT::Dictionaries,-c(Val_bing:Val))
+  cat("[Code_single] variable name is ", Val_bing::Val)
+  tryCatch(
+  {
+	Dictionariesx = dplyr::select(SADCAT::Dictionaries, -c(Val_bing:Val))
+  },
+  error = function(e) {
+  	cat("[Code_single] the following error occurred: ", e)
+  }
   res = merge(x = data, y = Dictionariesx, by.x = text, by.y = "word", all.x = T)
   res2 = dplyr::select(res, contains("_dict"))
   for(i in colnames(res2)){
