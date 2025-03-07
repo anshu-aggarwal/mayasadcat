@@ -8,17 +8,8 @@
 #' @export Code_single
 
 Code_single = function(data, text = "word", more2na = T){
-  tryCatch(
-    {
-    	Dictionariesx = dplyr::select(SADCAT::Dictionaries, -c(Val_bing:Val))
-    },
-    error = function(e) {
-  	cat("[Code_single] the following error occurred: ", e)
-    }
-  )
-  print("1")
+  Dictionariesx = dplyr::select(SADCAT::Dictionaries, -c(Val_bing:Val))
   res = merge(x = data, y = Dictionariesx, by.x = text, by.y = "word", all.x = T)
-  print("2")
   res2 = dplyr::select(res, contains("_dict"))
   for(i in colnames(res2)){
     res2[i] = apply(res2[i], 1, function(x) ifelse(is.na(x), 0, x)  )
@@ -26,19 +17,26 @@ Code_single = function(data, text = "word", more2na = T){
   res = dplyr::select(res, -contains("_dict"))
   res = cbind(res,res2)
   print("3")
-  if (is.null(SADCAT::Dictionaries)) {
+  if (is.null(Dictionaries)) {
      cat("[Code_single] Dictionaries is NULL, Senora!")
+     if (is.null(SADCAT::Dictionaries) {
+             cat("[Code_single] and so is SADCAT::Dictionaries")
+     }
+     else {
+             cat("[Code_single] but SADCAT::Dictionaries is not and there you have it!")
+     }
   }
   else {
-     cat("[Code_single] length of SADCAT::Dictionaries is ", length(SADCAT::Dictionaries), "\n")
-     cat("[Code_single] columns of SADCAT::Dictionaries are ", colnames(SADCAT::Dictionaries), "\n")
+     cat("[Code_single] length of Dictionaries is ", length(Dictionaries), "\n")
+     cat("[Code_single] columns of Dictionaries are ", colnames(Dictionaries), "\n")
   }
   tryCatch(
     {
 	Dicts_v3pre = unique(Dictionaries$word)
     },
     error = function(e) {
-  	cat("[Code_single] the following error occurred: ", e)
+  	print("[Code_single] the following error occurred: ")
+	print(e)
     }
   )
   print("4")
