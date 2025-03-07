@@ -14,9 +14,7 @@ Code_words = function(data, text = "word", more2na = T, parallelize = T, print =
   dataunique$preproc_text = Full_preprocess(dataunique$values, parallelize = parallelize)
   message("coding...")
   data2 = merge(x = data, y = dataunique, by.x = text, by.y = "values", all.x =T)
-  print("[Code_words] calling Code_single...")
   res = Code_single(data = data2, text = "preproc_text", more2na = more2na)
-  print("[Code_words] ... returned from Code_single")
   res2 = Code_sent(data = res, raw_text = text, preproc_text = "preproc_text")
   res2$Val_SWN = res2$PosScore - res2$NegScore
   is.nan.data.frame <- function(x) do.call(cbind, lapply(x, is.nan))

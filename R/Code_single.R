@@ -16,27 +16,17 @@ Code_single = function(data, text = "word", more2na = T){
   }
   res = dplyr::select(res, -contains("_dict"))
   res = cbind(res,res2)
-  print("3")
-  tryCatch(
-    {
-	Dicts_v3pre = unique(SADCAT::Dictionaries$word)
-    },
-    error = function(e) {
-  	print("[Code_single] the following error occurred: ")
-	print(e)
-    }
-  )
-  print("4")
+  Dicts_v3pre = unique(SADCAT::Dictionaries$word)
   res$NONE = as.numeric(!(as.matrix(res[[text]]) %in% as.matrix(Dicts_v3pre)))
   res$NONE2 = ifelse(stringr::str_count(res[[text]], "\\S+") > 2,NA,as.numeric(!(res[[text]]) %in% as.matrix(Dicts_v3pre)))
   if(more2na == F){
-    print("5")
     return(res)}
   else{
     data.table::setDT(res)
     nm1 <- grep('_dict', names(res), value=TRUE)
     for(j in nm1){
-      data.table::set(res, i=NULL, j=j, value= ifelse(stringr::str_count(res[[text]], "\\S+") > 2,NA, res[[j]]))}
-    print("6")
-    return(res)}
+      data.table::set(res, i=NULL, j=j, value= ifelse(stringr::str_count(res[[text]], "\\S+") > 2,NA, res[[j]]))
+    }
+    return(res)
+  }
 }
