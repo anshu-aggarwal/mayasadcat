@@ -19,7 +19,7 @@ Code_single = function(data, text = "word", more2na = T){
   print("3")
   if (is.null(Dictionaries)) {
      cat("[Code_single] Dictionaries is NULL, Senora!")
-     if (is.null(SADCAT::Dictionaries) {
+     if (is.null(SADCAT::Dictionaries)) {
              cat("[Code_single] and so is SADCAT::Dictionaries")
      }
      else {
