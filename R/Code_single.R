@@ -8,13 +8,6 @@
 #' @export Code_single
 
 Code_single = function(data, text = "word", more2na = T){
-  if (is.null(SADCAT::Dictionaries)) {
-     cat("[Code_single] Dictionaries is NULL, Senora!")
-  }
-  else {
-     cat("[Code_single] length of SADCAT::Dictionaries is ", length(SADCAT::Dictionaries), "\n")
-     cat("[Code_single] columns of SADCAT::Dictionaries are ", colnames(SADCAT::Dictionaries), "\n")
-  }
   tryCatch(
     {
     	Dictionariesx = dplyr::select(SADCAT::Dictionaries, -c(Val_bing:Val))
@@ -33,7 +26,21 @@ Code_single = function(data, text = "word", more2na = T){
   res = dplyr::select(res, -contains("_dict"))
   res = cbind(res,res2)
   print("3")
-  Dicts_v3pre = unique(Dictionaries$word)
+  if (is.null(SADCAT::Dictionaries)) {
+     cat("[Code_single] Dictionaries is NULL, Senora!")
+  }
+  else {
+     cat("[Code_single] length of SADCAT::Dictionaries is ", length(SADCAT::Dictionaries), "\n")
+     cat("[Code_single] columns of SADCAT::Dictionaries are ", colnames(SADCAT::Dictionaries), "\n")
+  }
+  tryCatch(
+    {
+	Dicts_v3pre = unique(Dictionaries$word)
+    },
+    error = function(e) {
+  	cat("[Code_single] the following error occurred: ", e)
+    }
+  )
   print("4")
   res$NONE = as.numeric(!(as.matrix(res[[text]]) %in% as.matrix(Dicts_v3pre)))
   res$NONE2 = ifelse(stringr::str_count(res[[text]], "\\S+") > 2,NA,as.numeric(!(res[[text]]) %in% as.matrix(Dicts_v3pre)))
