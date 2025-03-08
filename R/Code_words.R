@@ -8,8 +8,9 @@
 #' @export Code_words
 
 Code_words = function(data, text = "word", more2na = T, parallelize = T, print =T, debug=F){
-  crap <- Sys.getenv("WNHOME")
-  cat("WNHOME is ", crap)
+  crap <- Sys.getenv("GARBAGE")
+  cat("Garbage is ", crap)
+  stopifnot(FALSE)
   dataunique = unique(data[[text]])
   dataunique = data.frame(values = dataunique, stringsAsFactors = F)
   message("preprocessing...")
