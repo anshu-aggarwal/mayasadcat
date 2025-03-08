@@ -10,7 +10,7 @@
 Code_words = function(data, text = "word", more2na = T, parallelize = T, print =T, debug=F){
   crap <- Sys.getenv("GARBAGE")
   cat("Garbage is (", crap, ")\n")
-  if (is.null(crap) || crap=="" || crap==" ") {
+  if (is.null(crap) || crap=="") {
      print("crap is null")
   }
   else {
