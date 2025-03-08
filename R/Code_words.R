@@ -8,15 +8,6 @@
 #' @export Code_words
 
 Code_words = function(data, text = "word", more2na = T, parallelize = T, print =T, debug=F){
-  crap <- Sys.getenv("GARBAGE")
-  cat("Garbage is (", crap, ")\n")
-  if (is.null(crap) || crap=="") {
-     print("crap is null")
-  }
-  else {
-     print("crap is NOT null")
-  }
-  stopifnot(FALSE)
   dataunique = unique(data[[text]])
   dataunique = data.frame(values = dataunique, stringsAsFactors = F)
   message("preprocessing...")

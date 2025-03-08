@@ -13,8 +13,13 @@ Lemmatize = function(word, print =T, debug = F){
   if(!is.na(word)){
     if(word == ""){
       return("")}}
-    lemmax = koRpus::treetag(as.character(word), treetagger="manual", format="obj", debug = debug, TT.tknz=T, lang="en", TT.options=list(path="c:\\treetagger", preset="en"))
-#    lemmax = koRpus::treetag(as.character(word), treetagger="manual", format="obj", debug = debug, TT.tknz=T, lang="en", TT.options=list(path="/Users/mayaaggarwal/Downloads/TreeTagger", preset="en"))
+    ttlocation <- Sys.getenv("TTHOME")
+    if (is.null(ttlocation) || ttlocation=="") {
+       ttlocation = "c:\\treetagger"
+    }
+    cat("ttlocation is (", ttlocation, ")\n")
+    lemmax = koRpus::treetag(as.character(word), treetagger="manual", format="obj", debug = debug, TT.tknz=T, lang="en", TT.options=list(path=ttlocation, preset="en"))
+#    lemmax = koRpus::treetag(as.character(word), treetagger="manual", format="obj", debug = debug, TT.tknz=T, lang="en", TT.options=list(path="c:\\treetagger", preset="en"))
   if(lemmax@tokens[["lemma"]] == "<unknown>"){
     if (print == T){
     print(lemmax@tokens[["token"]])}
